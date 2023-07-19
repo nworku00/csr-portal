@@ -3,7 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "build/csr-portal",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
