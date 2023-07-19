@@ -4,7 +4,7 @@ import PortalContext from '../PortalContext'
 const Main = () => {
     const {user, setUser} = useContext(PortalContext) 
   return (
-    <div className='Main'></div>
+    <div className='Main'>hello</div>
   )
 }
 
