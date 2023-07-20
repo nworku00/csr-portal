@@ -1,11 +1,23 @@
-import React, { useContext } from 'react'
-import PortalContext from '../PortalContext'
+import React, { useContext, useState } from "react";
+import PortalContext from "../PortalContext";
+import UserList from "./UserList";
+import './Components.css'
+
 
 const Main = () => {
-    const {user, setUser} = useContext(PortalContext) 
-  return (
-    <div className='Main'>hello</div>
-  )
-}
+    return (
+        <div className="Main">
+            <UserList />
 
-export default Main
+            {/*
+            router set up
+            userprofile
+            useredit
+            
+            */}
+
+        </div>
+    );
+};
+
+export default Main;

@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,9 +14,10 @@ const firebaseConfig = {
   storageBucket: "csr-portal-fcb23.appspot.com",
   messagingSenderId: "867751935389",
   appId: "1:867751935389:web:a55cf7191f1a490efdc374",
-  measurementId: "G-427EB9W8D7"
+    measurementId: "G-427EB9W8D7",
+  databaseURL : "https://csr-portal-fcb23-default-rtdb.firebaseio.com/"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export const database = getDatabase(app);
