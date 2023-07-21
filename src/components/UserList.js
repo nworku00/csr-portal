@@ -1,12 +1,11 @@
 import React from "react";
+import "./Components.css"
 import SingleUser from "./SingleUser";
-
+import UserListHeader from "./UserListHeader";
 const UserList = () => {
-    const style = {
-        backgroundColor:'green'
-    }
     return (
-        <div className="UserList" style = {style}>
+        <div className="UserList">
+            <UserListHeader/>
             <SingleUser />
             <SingleUser />
             <SingleUser />

@@ -1,23 +1,49 @@
 .Main {
     width: 100vw;
-    height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: purple;
+    overflow-y: auto;
+    min-height: 85vh;
 }
 
 .Header {
-    height: 50px;
     display: flex;
     justify-content: space-around;
     padding: 15px;
-    background-color:blue
+    background-color:#2369b3
 }
 .Footer {
-    height: 80px;
+    padding: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:yellow
+    background-color:#d2b2f0
+}
+.UserList {
+    width: 60vw;
+    display: flex; 
+    flex-direction: column;
+}
+.UserListHeader {
+    justify-content: space-around;
+}
+.UserList > * {
+    display: flex;
+    align-items: center;
+    padding: 11px;
+    font-size: 20px;
+}
+.Catagories {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.SingleUser {
+    display: flex;
+    justify-content: space-around;
+    border: solid black 2px;
+    border-radius: 10px;
+    margin: 5px;
+    flex-wrap: wrap;
 }
