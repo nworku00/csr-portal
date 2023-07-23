@@ -1,16 +1,20 @@
 import React from "react";
-import "./Components.css"
-
-const SingleUser = () => {
-    return <div className="SingleUser">
-        <p>F. LastName</p>
-        <div>
-            <p style={{marginBottom: '7px' , marginTop:'5px'}}>email@email.com</p>
-            <p style={{marginTop: '5px', marginBottom:'7px'}}>123-456-7890</p>
+import "./Components.css";
+import { Button } from "@themesberg/react-bootstrap";
+const SingleUser = ({firstName , lastName, email , phoneNumber}) => {
+    return (
+        <div className="SingleUser">
+            <p>{firstName} {lastName}</p>
+            <div>
+                <p style={{ marginBottom: "7px", marginTop: "5px" }}>{email}</p>
+                <p style={{ marginTop: "5px", marginBottom: "7px" }}>{phoneNumber}</p>
+            </div>
+            <p>isActive</p>
+            <Button variant="primary" type="submit">
+                View or Edit Profile
+            </Button>
         </div>
-        <p>isActive</p>
-        <button>Select Profile</button>
-    </div>;
+    );
 };
 
 export default SingleUser;

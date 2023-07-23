@@ -1,15 +1,17 @@
 import React, { useContext, useState } from "react";
 import PortalContext from "../PortalContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import { Col, Row, Card, Form, Button, InputGroup } from "@themesberg/react-bootstrap";
+import { Col, Row, Card, Form, Button, InputGroup, Table } from "@themesberg/react-bootstrap";
 
 const UserProfile = () => {
+    
+    const clear = () => {
+        localStorage.clear()
+    }
     return (
-        <Card border="light" className="bg-white shadow-sm mb-4">
-            <Card.Body>
-                <h5 className="mb-4">General information</h5>
-                <Form>
+        <div className="UserProfile">
+            <Card border="light" className="bg-light shadow-sm mb-4 w-75">
+                <Card.Body>
+                    <h4 className="mb-4">Customer information</h4>
                     <Row>
                         <Col md={6} className="mb-3">
                             <Form.Group id="firstName">
@@ -29,18 +31,6 @@ const UserProfile = () => {
                                     type="text"
                                     placeholder="Also your last name"
                                 />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row className="align-items-center">
-                        <Col md={6} className="mb-3">
-                            <Form.Group id="gender">
-                                <Form.Label>Gender</Form.Label>
-                                <Form.Select defaultValue="0">
-                                    <option value="0">Gender</option>
-                                    <option value="1">Female</option>
-                                    <option value="2">Male</option>
-                                </Form.Select>
                             </Form.Group>
                         </Col>
                     </Row>
@@ -66,107 +56,120 @@ const UserProfile = () => {
                             </Form.Group>
                         </Col>
                     </Row>
-
-                    <h5 className="my-4">Address</h5>
                     <Row>
-                        <Col sm={9} className="mb-3">
-                            <Form.Group id="address">
-                                <Form.Label>Address</Form.Label>
+                        <Col md={6} className="mb-3">
+                            <Form.Group id="creditCard">
+                                <Form.Label>Credit Card Number</Form.Label>
+                                <Form.Control required type="text" placeholder="Example Number" />
+                            </Form.Group>
+                        </Col>
+                        <Col md={6} className="mb-3">
+                            <Form.Group id="creditCardExpiry">
+                                <Form.Label>Expiry</Form.Label>
                                 <Form.Control
                                     required
                                     type="text"
-                                    placeholder="Enter your home address"
+                                    placeholder='c'
                                 />
-                            </Form.Group>
-                        </Col>
-                        <Col sm={3} className="mb-3">
-                            <Form.Group id="addressNumber">
-                                <Form.Label>Number</Form.Label>
-                                <Form.Control required type="number" placeholder="No." />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={4} className="mb-3">
-                            <Form.Group id="city">
-                                <Form.Label>City</Form.Label>
-                                <Form.Control required type="text" placeholder="City" />
-                            </Form.Group>
-                        </Col>
-                        <Col sm={4} className="mb-3">
-                            <Form.Group className="mb-2">
-                                <Form.Label>Select state</Form.Label>
-                                <Form.Select id="state" defaultValue="0">
-                                    <option value="0">State</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="DC">District Of Columbia</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="NH">New Hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="NY">New York</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="WA">Washington</option>
-                                    <option value="WV">West Virginia</option>
-                                    <option value="WI">Wisconsin</option>
-                                    <option value="WY">Wyoming</option>
-                                </Form.Select>
-                            </Form.Group>
-                        </Col>
-                        <Col sm={4}>
-                            <Form.Group id="zip">
-                                <Form.Label>ZIP</Form.Label>
-                                <Form.Control required type="tel" placeholder="ZIP" />
                             </Form.Group>
                         </Col>
                     </Row>
                     <div className="mt-3">
                         <Button variant="primary" type="submit">
-                            Save All
+                            Submit Edit
                         </Button>
                     </div>
-                </Form>
-            </Card.Body>
-        </Card>
+                </Card.Body>
+            </Card>
+            <Card border="light" className="bg-light shadow-sm mb-4 w-75">
+                <Card.Body>
+                    <h4 className="mb-4">Purchase History and Vehicle Subscriptions</h4>
+                    <Row>
+                        <h5>Recent Purchases</h5>
+                        <Col className="mb-3">
+                            <Table bordered={true}>
+                                <thead>
+                                    <tr>
+                                        <th>Price</th>
+                                        <th>Details</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>5.40</td>
+                                        <td>Lorem ipsum dolor sit amet.</td>
+                                        <td>01/20/22</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2.50</td>
+                                        <td>Lorem ipsum dolor sit amet.</td>
+                                        <td>01/20/22</td>
+                                    </tr>
+                                    <tr>
+                                        <td>300</td>
+                                        <td>Lorem ipsum dolor sit amet.</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <h5>Vehicles</h5>
+                        <Col className="mb-3">
+                            <Table bordered={true}>
+                                <thead>
+                                    <tr>
+                                        <th className="w-25">Make</th>
+                                        <th className="w-25">Model</th>
+                                        <th className="w-25">Tag</th>
+                                        <th className="w-25">Active Subscription</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Toyota</td>
+                                        <td>Camry</td>
+                                        <td>
+                                        123abc
+                                        </td>
+                                        <td>
+                                        <input type="checkbox" name="" id="activeSub" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Toyota</td>
+                                        <td>4Runner</td>
+                                        <td>
+                                        123abc
+                                        </td>
+                                        <td>
+                                        <input type="checkbox" name="" id="activeSub" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ford</td>
+                                        <td>Mustang</td>
+                                        <td>
+                                        123abc
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="" id="activeSub" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                    <div className="mt-3">
+                        <Button variant="primary" type="submit">
+                            Submit Edit
+                        </Button>
+                    </div>
+                </Card.Body>
+            </Card>
+        </div>
     );
 };
 
