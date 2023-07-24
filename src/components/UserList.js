@@ -109,7 +109,7 @@ const UserList = () => {
                 </Menu>
             </div>
             {/* filteredUsers variable is mapped here because it returns all users by default and then allows you to sort/filter/search
-            without having to rchange variables */}
+            without having to change variables */}
             {filteredUsers.map((user) => (
                 <SingleUser
                     key={user.id}
