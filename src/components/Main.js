@@ -1,13 +1,10 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import {Routes, Route} from 'react-router-dom'
-import PortalContext from "../PortalContext";
 import UserList from "./UserList";
 import UserProfile from './UserProfile'
-import UserProfileEdit from './UserProfileEdit'
-import seedData from "./seedData";
 import './Components.css'
-import { Button } from "semantic-ui-react";
 
+//this component is just for a container/layout purposes, and to control routing for rendering
 
 const Main = () => {
     return (
