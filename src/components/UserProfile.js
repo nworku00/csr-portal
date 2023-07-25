@@ -231,7 +231,7 @@ const UserProfile = () => {
                                             <td>
                                                 <input
                                                     type="checkbox"
-                                                    name=""
+                                                    name="checkbox"
                                                     id="activeSub"
                                                     defaultChecked={vehicle.activeSub}
                                                     onChange={(e) =>
