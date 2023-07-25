@@ -1,4 +1,30 @@
-# Getting Started with Create React App
+# Customer First Solutions, an App by Natinael Worku for the Insiten Coding Challlenge
+[Deployment Link](https://csr-portal.onrender.com/)
+
+Hello Team or anyone else using my app,
+
+This is my project based on the guidelines :
+Your task is to develop the Customer Service Representative(CSR) portal with the following required features:
+1. View a list of users: CSRs should be able to see a list of all registered users of the
+mobile app.
+2. Quickly find and view details for a specific user: CSRs should be able to access
+detailed information about a specific user, including their account information,
+active vehicle subscriptions, and purchase history.
+3. Edit account information: CSRs should be able to modify account information for
+users, such as name, email, phone number, or other important details.
+4. View/Edit vehicle subscriptions: CSRs should have the ability to view and edit
+vehicle subscriptions for users. This includes adding, removing, or transferring
+subscriptions.
+
+My goal with this project was to follow the guidelines and to also use logic to figure out what features an actual CSR would need and would have access to.
+
+This project uses React Bootstrap, Semantic UI, Material UI, and React Router
+
+This project also uses localStorage and sessionStorage to mock data storage
+
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
