@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import "./Components.css";
-import SingleUser from "./SingleUser";
 import PortalContext from "../PortalContext";
 import { Input, Dropdown, Menu } from "semantic-ui-react";
-
+import { Button, Table } from "@themesberg/react-bootstrap";
+import { Link } from "react-router-dom";
 //just some options for the 2 dropdown menus
 const optionsSort = [
     { key: 1, text: "A-Z", value: "asc" },
@@ -38,12 +38,6 @@ const UserList = () => {
         setFilteringOption(data.value);
     };
 
-    //selectedUser is stored in sessionStorage to ensure it doesn't interfere with user data in local storage,
-    //and so that once user is selected when you are taken to UserProfile page the it keeps that user on refresh
-    const handleUserSelect = (user) => {
-        sessionStorage.setItem("selected", JSON.stringify(user));
-        setSelectedUser(user);
-    };
     //search function checks if anything is typed, then checks users' first names or last names, then filters users
     const searchedUsers = searchInput
         ? users.filter(
@@ -70,18 +64,24 @@ const UserList = () => {
         return user.vehicles.some((vehicle) => vehicle.activeSub);
     };
     //filter function checks and sorts by subscription status
-    const filteredUsers =
-        filteringOption === "all"
-            ? sortedUsers
-            : sortedUsers.filter((user) => {
-                  if (filteringOption === true) {
-                      return hasActiveSubscription(user);
-                  } else if (filteringOption === false) {
-                      return !hasActiveSubscription(user);
-                  }
-                  return false;
-              });
-
+    const filteredUsers = (() => {
+        switch (filteringOption) {
+            case "all":
+                return sortedUsers;
+            case true:
+                return sortedUsers.filter((user) => hasActiveSubscription(user));
+            case false:
+                return sortedUsers.filter((user) => !hasActiveSubscription(user));
+            default:
+                return sortedUsers;
+        }
+    })();
+    //selectedUser is stored in sessionStorage to ensure it doesn't interfere with user data in local storage,
+    //and so that once user is selected when you are taken to UserProfile page the it keeps that user on refresh
+    const handleUserSelect = (user) => {
+        sessionStorage.setItem("selected", JSON.stringify(user));
+        setSelectedUser(user);
+    };
     return (
         <div className="UserList">
             <div className="UserListHeader">
@@ -108,19 +108,47 @@ const UserList = () => {
                     />
                 </Menu>
             </div>
-            {/* filteredUsers variable is mapped here because it returns all users by default and then allows you to sort/filter/search
-            without having to change variables */}
-            {filteredUsers.map((user) => (
-                <SingleUser
-                    key={user.id}
-                    firstName={user.firstName}
-                    lastName={user.lastName}
-                    email={user.email}
-                    phoneNumber={user.phoneNum}
-                    handleUserSelect={() => handleUserSelect(user)}
-                    activeSub={hasActiveSubscription(user)}
-                />
-            ))}
+            
+                <Table striped>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Subscription Status</th>
+                            <th>Show/Edit User Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* filteredUsers variable is mapped here because it returns all users by default and then allows you to 
+                        sort/filter/search without having to change variables */}
+                        {filteredUsers.map((user, index) => (
+                            <tr key={index}>
+                                <td>
+                                    {user.firstName} {user.lastName}
+                                </td>
+                                <td>{user.email}</td>
+                                <td>{user.phoneNum}</td>
+                                {hasActiveSubscription(user) ? (
+                                    <td>Active Subscription(s)</td>
+                                ) : (
+                                    <td>No Active Subscriptions</td>
+                                )}
+                                <td>
+                                    <Link to="/profile">
+                                        <Button
+                                            variant="primary"
+                                            type="submit"
+                                            onClick={() => handleUserSelect(user)}>
+                                            View or Edit Profile
+                                        </Button>
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            
         </div>
     );
 };

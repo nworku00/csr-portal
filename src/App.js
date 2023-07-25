@@ -7,9 +7,12 @@ import Footer from "./components/Footer";
 import seedData from "./components/seedData";
 function App() {
 
-    //states are defined here to allow all components to access and change
+    
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState({});
+
+    //user state is initialized with the session storage selected user so that UserProfile keeps information on reload, works with
+    //works with navigation redirect so when you try to access the /profile route without a selected user it redirects to homepage
+    const [selectedUser, setSelectedUser] = useState(JSON.parse(sessionStorage.getItem("selected")));
     
     //this useEffect first checks if local storage has been populated by user seed data, then adds seed data if not
     //then it gets users from localStorage, i did this so that data is always populated from local storage, the only time seed

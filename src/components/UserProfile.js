@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import PortalContext from "../PortalContext";
+import UserUpdatePopup from "./UserUpdatePopup";
 import { Col, Row, Card, Form, Button, Table } from "@themesberg/react-bootstrap";
 
 const UserProfile = () => {
@@ -13,7 +14,13 @@ const UserProfile = () => {
     const [newPhoneNum, setNewPhoneNum] = useState(selectedUser.phoneNum);
     const [newCreditNum, setNewCreditNum] = useState(selectedUser.creditNum);
     const [newCreditExpiry, setNewCreditExpiry] = useState(selectedUser.creditExpiry);
-    const [newVehicles, setNewVehicles] = useState(selectedUser.vehicles)
+    const [newRecentPurchases, setNewRecentPurchases] = useState(selectedUser.recentPurchases);
+    const [newVehicles, setNewVehicles] = useState(selectedUser.vehicles);
+
+    //window popup state and message
+    const [show, setShow] = useState(false);
+    const [popupMessage , setPopupMessage] = useState('')
+    //selected user is set here in order to keep UserProfile working because selectedUser is initialized as an empty object
 
     //functions to capture input data
     const handleNewFirstNameChange = (e) => {
@@ -44,11 +51,28 @@ const UserProfile = () => {
         const updatedVehicles = [...newVehicles];
         updatedVehicles[index].activeSub = e.target.checked;
         setNewVehicles(updatedVehicles);
-      };
-    //main function of UserProfile : ...selectedUser is here to make a copy of the selectedUser, whatever you don't change/can't change is kept and is all included so that the format of the object stays the same
-    //then, the 'selectedUser',  sessionstorage version, and the localstorage version are all set to the updated user, and then the user state is updated to the new user info, so that the changes are reflected in the UserProfile page and the UserList page
+    };
+
+    //function to handle pop up when user is updated
+    const handlePopupClose = () => setShow(false);
+    const handlePopupShow = () => setShow(true);
+
+    //main function of UserProfile : ...selectedUser is here to make a copy of the selectedUser, whatever you don't change/can't change is kept and is all included so that the format of the object stays the same, also includes a check if any field is empty
+    //then, the 'selectedUser',  sessionstorage version, and the localstorage version are all set to the updated user, and then the user state is updated to the new user info, so that the changes are reflected in the UserProfile page and the UserList page, then popup is shown to confirm update
     const handleNewUserSubmit = (e) => {
         e.preventDefault();
+        if (
+            !newFirstName ||
+            !newLastName ||
+            !newEmail ||
+            !newPhoneNum ||
+            !newCreditNum ||
+            !newCreditExpiry
+        ) {
+            setPopupMessage('Fields Cannot Be Empty')
+            handlePopupShow()
+            return;
+        }
         const updatedUser = {
             ...selectedUser,
             firstName: newFirstName,
@@ -57,7 +81,7 @@ const UserProfile = () => {
             phoneNum: newPhoneNum,
             creditNum: newCreditNum,
             creditExpiry: newCreditExpiry,
-            vehicles: newVehicles
+            vehicles: newVehicles,
         };
         sessionStorage.setItem("selected", JSON.stringify(updatedUser));
         setSelectedUser(updatedUser);
@@ -71,9 +95,13 @@ const UserProfile = () => {
             }
         });
         setUsers(usersFromLocalStorage);
+        setPopupMessage('User Updated Successfully')
+        handlePopupShow();
     };
+
     return (
         <div className="UserProfile">
+            <UserUpdatePopup show={show} handlePopupClose={handlePopupClose} popupMessage={popupMessage} />
             <Card border="light" className="bg-light shadow-sm mb-4 w-75">
                 <Card.Body>
                     <h4 className="mb-4">Customer information</h4>
@@ -171,7 +199,7 @@ const UserProfile = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {selectedUser.recentPurchases.map((purchase, index) => (
+                                    {newRecentPurchases.map((purchase, index) => (
                                         <tr key={index}>
                                             <td>{purchase.price}</td>
                                             <td>{purchase.details}</td>
@@ -195,7 +223,7 @@ const UserProfile = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {selectedUser.vehicles.map((vehicle, index) => (
+                                    {newVehicles.map((vehicle, index) => (
                                         <tr key={index}>
                                             <td>{vehicle.make}</td>
                                             <td>{vehicle.model}</td>
@@ -206,7 +234,9 @@ const UserProfile = () => {
                                                     name=""
                                                     id="activeSub"
                                                     defaultChecked={vehicle.activeSub}
-                                                    onChange={(e) => handleActiveSubChange(index, e)}
+                                                    onChange={(e) =>
+                                                        handleActiveSubChange(index, e)
+                                                    }
                                                 />
                                             </td>
                                         </tr>
@@ -219,7 +249,7 @@ const UserProfile = () => {
                         {/* this button does the same thing as the other button, originally it just submitted purchase data and vehicle data but 
                         because I decided to just make active subscriptions changeable I just rolled the functionality into the other button's
                         handle change and made this button do the same thing */}
-                    <Button variant="primary" type="submit" onClick={handleNewUserSubmit}>
+                        <Button variant="primary" type="submit" onClick={handleNewUserSubmit}>
                             Submit Edit
                         </Button>
                     </div>
