@@ -59,7 +59,7 @@ const UserList = () => {
               }
           })
         : searchedUsers;
-    //hasActiveSubscription checker given own function to be able to be used passed as a prop to filtereduUer.map function
+    //hasActiveSubscription checker given own function to be able to be used passed as a prop to filteredUser.map function
     const hasActiveSubscription = (user) => {
         return user.vehicles.some((vehicle) => vehicle.activeSub);
     };
