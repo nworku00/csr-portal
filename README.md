@@ -1,7 +1,7 @@
-# Customer First Solutions, an App by Natinael Worku for the Insiten Coding Challlenge
+# Customer First Solutions, an App by Natinael Worku
 [Deployment Link](https://csr-portal.onrender.com/)
 
-Hello Team or anyone else using my app,
+Hello anyone using my app,
 
 This is my project based on the guidelines :
 Your task is to develop the Customer Service Representative(CSR) portal with the following required features:
