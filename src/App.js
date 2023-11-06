@@ -23,15 +23,7 @@ function App() {
             let user = seedData[i];
             localStorage.setItem(`user${user.id}`, JSON.stringify(user));
         }
-        let localStorageKeys = Object.keys(localStorage);
-        let usersFromLocalStorage = [];
-        localStorageKeys.forEach((key) => {
-            const userData = JSON.parse(localStorage.getItem(key));
-            if (userData) {
-                usersFromLocalStorage.push(userData);
-            }
-        });
-        setUsers(usersFromLocalStorage);
+        setUsers(seedData);
     }, []);
     return (
         <div className="App">
